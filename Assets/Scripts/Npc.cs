@@ -15,43 +15,8 @@ namespace System.Runtime.CompilerServices
 [RequireComponent(typeof(NavMeshAgent), typeof(Animator))]
 public class Npc : MonoBehaviour
 {
-
     public Animator Animator;
     public GameObject FoodTarget;
-
-    public abstract class AnimationTrigger
-    {
-        public abstract string TriggerName { get; init; }
-        protected AnimationTrigger(string str)
-        {
-            TriggerName = str;
-        }
-    }
-
-    public class Moving : AnimationTrigger
-    {
-        public Moving() : base("Moving") { }
-        public override string TriggerName { get; init; } = "Moving";
-    }
-
-    public class Eating : AnimationTrigger
-    {
-        public Eating() : base("Eating") { }
-        public override string TriggerName { get; init; } = "Eating";
-    }
-
-    public class Idle : AnimationTrigger
-    {
-        public Idle() : base("Idle") { }
-        public override string TriggerName { get; init; } = "Idle";
-    }
-
-    public class Dead : AnimationTrigger
-    {
-        public Dead() : base("Dead") { }
-        public override string TriggerName { get; init; } = "Dead";
-    }
-
 
     public void TriggerAnimation(AnimationTrigger trigger)
     {
@@ -69,8 +34,8 @@ public class Npc : MonoBehaviour
     public Action? OnEatingAnimationEndEvent;
     public Action? OnDeadAnimationEndEvent;
 
-    public readonly float IdleConsumptionRate = 5f;
-    public readonly float MoveConsumptionRate = 7f;
+    public readonly float IdleConsumptionRate = 10f;
+    public readonly float MoveConsumptionRate = 20f;
 
     public readonly float FeelingHungryThreshold = 180f;
 

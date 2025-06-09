@@ -13,7 +13,7 @@ public class IdleState : BaseNpcState
 
     protected override void OnEnterState()
     {
-        Context.TriggerAnimation(new Npc.Idle());
+        Context.TriggerAnimation(new Idle());
     }
 
     protected override void UpdateState()
@@ -42,7 +42,7 @@ public class MoveNextFoodState : BaseNpcState
     protected override void OnEnterState()
     {
         Debug.Log($"MoveNextFoodState状態に入りました: {Context.Health.Value}");
-        Context.TriggerAnimation(new Npc.Moving());
+        Context.TriggerAnimation(new Moving());
     }
 
     protected override void UpdateState()
@@ -98,8 +98,9 @@ public class DeadState : BaseNpcState
 
     protected override void OnEnterState()
     {
-        Context.TriggerAnimation(new Npc.Dead());
+        Context.TriggerAnimation(new Dead());
         Debug.Log("NPCは死亡しました。ゲームオーバーです。");
+        Context.Agent.isStopped = true;
         // Context.gameObject.SetActive(false); // この行を削除（アニメーション終了後に処理）
     }
 
@@ -134,7 +135,7 @@ public class EatingState : BaseNpcState
     protected override void OnEnterState()
     {
         Debug.Log("EatingState状態に入りました");
-        Context.TriggerAnimation(new Npc.Eating());
+        Context.TriggerAnimation(new Eating());
         if (Context.FoodTarget == null)
         {
             Debug.LogWarning("nextFoodが設定されていません。Idleに戻ります。");

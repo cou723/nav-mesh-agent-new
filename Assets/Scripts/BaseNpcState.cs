@@ -63,12 +63,13 @@ public abstract class BaseNpcState : ImtStateMachine<Npc>.State
         // 移動処理（必要な場合のみ）
         if (mover != null)
         {
-            if(!Context.TryGetComponent<Animator>(out var animator)) {
+            if (!Context.TryGetComponent<Animator>(out var animator))
+            {
                 Debug.LogWarning("Animatorが見つかりません。移動機能を無効化します。");
                 return;
             }
 
-            mover.ReflectMovementSpeed(animator,Context.Agent);
+            mover.ReflectMovementSpeed(animator, Context.Agent);
         }
 
 

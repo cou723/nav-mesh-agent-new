@@ -8,15 +8,6 @@ public class FeedingGround : MonoBehaviour
     private readonly float healthAmount = 10f;
     public float HealthAmount { get { return healthAmount; } }
 
-
-    void Start()
-    {
-    }
-
-    void Update()
-    {
-    }
-
     public bool Ate()
     {
         if (gameObject.activeSelf == false) return false;
