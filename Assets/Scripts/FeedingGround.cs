@@ -4,14 +4,13 @@ public class FeedingGround : MonoBehaviour
 {
     public float beforeAte = 0;
 
-    public readonly float reSpawnTime = 5f;
-    private float healthAmount = 50f;
+    public readonly float reSpawnTime = 30f;
+    private readonly float healthAmount = 10f;
     public float HealthAmount { get { return healthAmount; } }
 
 
     void Start()
     {
-        Debug.Log(gameObject.tag);
     }
 
     void Update()

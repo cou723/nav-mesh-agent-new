@@ -56,9 +56,9 @@ public class NavMeshMover : IMovable
     {
     }
 
-    public void ReflectMovementSpeed(Rigidbody rigidbody, Animator animator)
+    public void ReflectMovementSpeed(Animator animator, NavMeshAgent agent)
     {
-        movementSpeed = rigidbody.linearVelocity.magnitude;
+        movementSpeed = agent.velocity.magnitude / agent.speed;
         animator.SetFloat("MovementSpeed", movementSpeed);
     }
 }

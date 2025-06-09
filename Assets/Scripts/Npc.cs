@@ -66,11 +66,11 @@ public class Npc : MonoBehaviour
     public Health Health = new(200f);
 
     // アニメーション終了イベント用のデリゲート
-    public System.Action? OnEatingAnimationEndEvent;
-    public System.Action? OnDeadAnimationEndEvent;
+    public Action? OnEatingAnimationEndEvent;
+    public Action? OnDeadAnimationEndEvent;
 
-    public readonly float IdleConsumptionRate = 2f;
-    public readonly float MoveConsumptionRate = 3f;
+    public readonly float IdleConsumptionRate = 5f;
+    public readonly float MoveConsumptionRate = 7f;
 
     public readonly float FeelingHungryThreshold = 180f;
 
@@ -80,10 +80,9 @@ public class Npc : MonoBehaviour
         MoveToFood = 2,
         ToIdle = 3,
         Hungry = 4,
-        Dead = 5
+        Dead = 5,
+        TryEating
     }
-
-
 
     void Start()
     {
@@ -117,6 +116,9 @@ public class Npc : MonoBehaviour
 
         stateMachine.AddTransition<MoveNextFoodState, IdleState>((int)NpcEvent.ToIdle);
         stateMachine.AddTransition<MoveNextFoodState, DeadState>((int)NpcEvent.Dead);
+        stateMachine.AddTransition<MoveNextFoodState, EatingState>((int)NpcEvent.TryEating);
+
+        stateMachine.AddTransition<EatingState, IdleState>((int)NpcEvent.ToIdle);
 
         // 開始ステートの設定
         stateMachine.SetStartState<IdleState>();

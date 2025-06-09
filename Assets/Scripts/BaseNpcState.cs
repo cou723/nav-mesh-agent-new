@@ -37,8 +37,7 @@ public abstract class BaseNpcState : ImtStateMachine<Npc>.State
         if (needsMovement)
         {
             // NavMeshAgentを取得
-            var agent = Context.GetComponent<UnityEngine.AI.NavMeshAgent>();
-            if (agent != null)
+            if (Context.TryGetComponent<UnityEngine.AI.NavMeshAgent>(out var agent))
             {
                 mover = new NavMeshMover(agent);
             }
@@ -64,18 +63,12 @@ public abstract class BaseNpcState : ImtStateMachine<Npc>.State
         // 移動処理（必要な場合のみ）
         if (mover != null)
         {
-            if (!Context.TryGetComponent<Rigidbody>(out var rb))
-            {
-                Debug.LogWarning("Rigidbodyが見つかりません。移動機能を無効化します。");
-                return;
-            }
-
             if(!Context.TryGetComponent<Animator>(out var animator)) {
                 Debug.LogWarning("Animatorが見つかりません。移動機能を無効化します。");
                 return;
             }
 
-            mover.ReflectMovementSpeed(rb, animator);
+            mover.ReflectMovementSpeed(animator,Context.Agent);
         }
 
 

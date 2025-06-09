@@ -1,5 +1,6 @@
 #nullable enable
 using UnityEngine;
+using UnityEngine.AI;
 
 /// <summary>
 /// ヘルスチェック機能を提供するインターフェース
@@ -28,5 +29,5 @@ public interface IMovable
     /// </summary>
     void Move();
 
-    void ReflectMovementSpeed(Rigidbody rigidbody, Animator animator);
+    void ReflectMovementSpeed(Animator animator, NavMeshAgent agent);
 }
